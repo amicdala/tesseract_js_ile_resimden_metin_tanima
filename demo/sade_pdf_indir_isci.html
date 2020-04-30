@@ -1,0 +1,151 @@
+<! –– 30.04.2020  Murat Karagöz    https://github.com/muratkaragoz/tesseract_js_ile_resimden_metin_tanima  ––>
+<! –– This work is licensed under Apache License 2.0  ––>
+
+
+<!DOCTYPE html>
+<html lang="tr">	
+<head>
+<meta charset="utf-8">
+<title>Tesseract.js ile Resimden Metin Tanıma - Türkçe OCR(Optik Karakter Tanıma)</title>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+
+
+<! –– Tesseract.js Resimden Metin Tanıma ––>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/2.1.1/tesseract.min.js" ></script>
+
+<! –– Resim Seçme ––>
+<input id="resim_sec" name="resim_sec" type="file"  capture="camera" accept="image/*" >
+
+  <button id="pdf_indir" disabled="true">PDF İndir</button>
+  
+  
+<br/><br/>
+
+<! –– Sonuç Göster ––>
+<textarea id="sonuc" style="width:100%;height:320px" ></textarea> 
+
+<br/><br/>
+
+<! –– İlerleme Çubuğu Göster ––>
+<section><div id="durum"></div><progress value="" max="1" style="width:100%;" ></progress></section>	
+  
+	
+	
+	
+<script>
+
+function ilerlemeGuncelle(paket)
+{
+	
+	if(paket.status == 'loading tesseract core')
+		{
+			document.querySelector("#durum").innerHTML = "Tesseract çekirdeği yükleniyor";
+		}
+		
+	if(paket.status == 'initializing tesseract')
+		{
+			document.querySelector("#durum").innerHTML = "Tesseract başlatılıyor";
+		}
+		
+	if(paket.status == 'initialized tesseract')
+		{
+			document.querySelector("#durum").innerHTML = "Tesseract başlatıldı";
+		}
+		
+	if(paket.status == 'loading language traineddata')
+		{
+			document.querySelector("#durum").innerHTML = "Dil verileri yükleniyor";
+		}
+		
+	if(paket.status == 'loaded language traineddata')
+		{
+			document.querySelector("#durum").innerHTML = "Dil verileri yüklendi";
+		}
+		
+	if(paket.status == 'initializing api')
+		{
+			document.querySelector("#durum").innerHTML = "API başlatılıyor";
+		}
+		
+	if(paket.status == 'initialized api')
+		{
+			document.querySelector("#durum").innerHTML = "API başlatıldı";
+		}
+		
+	if(paket.status == 'recognizing text')
+		{
+			document.querySelector("#durum").innerHTML = "Metin tanınıyor";
+		}
+	
+	if(paket.status == 'done')
+		{
+			document.querySelector("#durum").innerHTML = "Bitti";
+		}	
+		
+	
+		
+		if('progress' in paket)
+		{
+			document.querySelector("progress").value = paket.progress
+		}
+
+	
+}
+
+
+
+
+	  const dil = "tur";
+	  
+      const { createWorker } = Tesseract;
+      const worker = createWorker({
+        
+        logger: ilerlemeGuncelle,
+      });
+	  
+      const resim_sec = document.getElementById('resim_sec');
+      const pdf_indir_dugmesi = document.getElementById('pdf_indir');
+	  
+      const recognize = async ({ target: { files }  }) => {
+        await worker.load();
+        await worker.loadLanguage(dil);
+        await worker.initialize(dil);
+        const { data: { text } } = await worker.recognize(files[0]);
+        const sonuc = document.getElementById('sonuc');
+        sonuc.value = text;
+        pdf_indir_dugmesi.disabled = false;
+      };
+	  
+	  
+      const PDF_Indir = async () => {
+        const filename = 'tesseract-ocr-sonuc.pdf';
+        const { data } = await worker.getPDF('Tesseract OCR Sonuc');
+        const blob = new Blob([new Uint8Array(data)], { type: 'application/pdf' });
+        if (navigator.msSaveBlob) {
+          // IE 10+
+          navigator.msSaveBlob(blob, filename);
+        } else {
+          const link = document.createElement('a');
+          if (link.download !== undefined) {
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', filename);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }
+        }
+      };
+	  
+	  
+      resim_sec.addEventListener('change', recognize);
+      pdf_indir_dugmesi.addEventListener('click', PDF_Indir);
+    </script>
+
+
+
+
+
+</html>

@@ -17,5 +17,5 @@
 
 
 ### Lisans
-Apache Lisansı 2.0 (Apache License 2.0) ile  lisanslanmıştır. Detaylar için LİSANS dosyasına bakın.
+Apache Lisansı 2.0 (Apache License 2.0) ile  lisanslanmıştır. Detaylar için <a href=https://github.com/muratkaragoz/tesseract_js_ile_resimden_metin_tanima/blob/master/L%C4%B0SANS>LİSANS</a> dosyasına bakın.
 

@@ -5,7 +5,7 @@
 
 1)Resimlerin içindeki yazıyı çıkarır.Örneğin, tarayıcıda taradığınız bir kitabın resimlerini yazıya dönüştürür.
 
-2)Türkçenin dışında birçok dili destekler. Desteklediği diller için https://github.com/naptha/tesseract.js adresine bakın.
+2)Türkçenin dışında 65 dili daha destekler. Desteklediği diller için https://tesseract-ocr.github.io/tessdoc/Data-Files#data-files-for-version-400-november-29-2016 adresine bakın.
 
 3)Tesseract.js bir javascript kodudur.Bu sebeple internet tarayıcısı (Internet Explorer, Google Chrome, Firefox, vb.) üzerinden çalışır.
 

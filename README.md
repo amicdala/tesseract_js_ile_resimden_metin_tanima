@@ -3,7 +3,7 @@
 
 Özellikleri:
 
-1)Resimlerin içindeki yazıyı çıkarır.Yani tarayıcıda taradığınız bir kitabın resimlerini yazıya dönüştürür.
+1)Resimlerin içindeki yazıyı çıkarır.Örneğin, tarayıcıda taradığınız bir kitabın resimlerini yazıya dönüştürür.
 
 2)Türkçenin dışında birçok dili destekler. Desteklediği diller için https://github.com/naptha/tesseract.js adresine bakın.
 

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+
+
+
+
+<! –– Tesseract.js Resimden Metin Tanıma ––>
+<script src="https://unpkg.com/tesseract.js@2.0.0/dist/tesseract.min.js" ></script>
+
+<! –– Resim Seçme ––>
+<input id="resim_sec" name="resim_sec" type="file"  capture="camera" accept="image/*" >
+
+<br/><br/>
+
+<! –– Sonuç Göster ––>
+<textarea id="sonuc" style="width:100%;height:320px" ></textarea> 
+
+<br/><br/>
+
+<! –– İlerleme Çubuğu Göster ––>
+<section><div id="durum"></div><progress value="" max="1" style="width:100%;" ></progress></section>	
+  
+	
+	
+	
+<script>
+
+function ilerlemeGuncelle(paket)
+{
+	
+	if(paket.status == 'loading tesseract core')
+		{
+			document.querySelector("#durum").innerHTML = "Tesseract çekirdeği yükleniyor";
+		}
+		
+	if(paket.status == 'initializing tesseract')
+		{
+			document.querySelector("#durum").innerHTML = "Tesseract başlatılıyor";
+		}
+		
+	if(paket.status == 'initialized tesseract')
+		{
+			document.querySelector("#durum").innerHTML = "Tesseract başlatıldı";
+		}
+		
+	if(paket.status == 'loading language traineddata')
+		{
+			document.querySelector("#durum").innerHTML = "Dil verileri yükleniyor";
+		}
+		
+	if(paket.status == 'loaded language traineddata')
+		{
+			document.querySelector("#durum").innerHTML = "Dil verileri yüklendi";
+		}
+		
+	if(paket.status == 'initializing api')
+		{
+			document.querySelector("#durum").innerHTML = "API başlatılıyor";
+		}
+		
+	if(paket.status == 'initialized api')
+		{
+			document.querySelector("#durum").innerHTML = "API başlatıldı";
+		}
+		
+	if(paket.status == 'recognizing text')
+		{
+			document.querySelector("#durum").innerHTML = "Metin tanınıyor";
+		}
+	
+	if(paket.status == 'done')
+		{
+			document.querySelector("#durum").innerHTML = "Bitti";
+			document.querySelector("#sonuc").innerHTML = paket.data.data.text;
+		}	
+		
+	
+		
+		if('progress' in paket)
+		{
+			document.querySelector("progress").value = paket.progress
+		}
+
+	
+}
+
+
+      const recognize = function(evt)
+	  {
+		const dil = "tur" 
+		
+        const files = evt.target.files;
+        const worker = Tesseract.createWorker({
+          logger: ilerlemeGuncelle,
+          cacheMethod: 'none',
+        });
+        Promise.resolve()
+          .then(() => worker.load())
+          .then(() => worker.loadLanguage(dil))
+          .then(() => worker.initialize(dil))
+          .then(() => worker.recognize(files[0]))
+          .then((ret) => {
+           
+			document.querySelector("#sonuc").innerHTML = ret.data.text;
+          });
+      }
+	  
+      const elm = document.getElementById('resim_sec');
+      elm.addEventListener('change', recognize);
+    </script>
+
+
+
+
+
+</html>

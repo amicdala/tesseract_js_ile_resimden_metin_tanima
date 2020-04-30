@@ -261,11 +261,11 @@ function ilerlemeGuncelle(paket)
 
 	if(paket.status == 'Bitti')
 	{
-		var pre = document.createElement('textarea')
-		pre.style.cssText = 'width:100%;height:320px'
-		pre.appendChild(document.createTextNode(paket.data.data.text))
+		var metin_alani = document.createElement('textarea')
+		metin_alani.style.cssText = 'width:100%;height:320px'
+		metin_alani.appendChild(document.createTextNode(paket.data.data.text))
 		satir.innerHTML = ''
-		satir.appendChild(pre);
+		satir.appendChild(metin_alani);
 	}
 
 	log.insertBefore(satir, log.firstChild)

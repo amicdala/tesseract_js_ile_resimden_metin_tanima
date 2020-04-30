@@ -1,2 +1,2 @@
-# Tesseract.js ile Resimden Metin Tanıma (Optik Karakter Tanima) Örneği
+# Tesseract.js ile Resimden Metin Tanıma (Optik Karakter Tanima)
 

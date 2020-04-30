@@ -13,7 +13,7 @@
 
 5)Tesseract.js https://github.com/naptha/tesseract.js adresindeki geliştirici tarafından yazılmış. Tüm telif hakları ona aittir. Burada sadece kullanım için örnekler paylaşılmaktadır.
 
-6)Buradaki örnekleri istediğiniz gibi kullanmakta özgürsünüz.
+6)Buradaki örnekleri kaynak göstermek şartıyla istediğiniz gibi kullanmakta özgürsünüz.
 
 
 ### Lisans

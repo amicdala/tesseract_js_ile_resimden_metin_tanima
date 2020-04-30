@@ -15,6 +15,7 @@
 
 6)Buradaki örnekleri kaynak göstermek şartıyla istediğiniz gibi kullanmakta özgürsünüz.
 
+Not: Buradaki örnekler, normal Javascipt için tasarlanmıştır.
 
 ### Lisans
 Apache Lisansı 2.0 (Apache License 2.0) ile  lisanslanmıştır. Detaylar için <a href=https://github.com/muratkaragoz/tesseract_js_ile_resimden_metin_tanima/blob/master/L%C4%B0SANS>LİSANS</a> dosyasına bakın.
